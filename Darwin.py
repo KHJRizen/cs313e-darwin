@@ -12,18 +12,18 @@ class Darwin:
 			self.grid.append([])
 			for c in range(self.columns):
 				self.grid[r].append(0)
-
+				
+	def cycle(self):
+		for r in range(self.rows):
+			for c in range(self.columns):
+				if (self.grid[r][c] != 0 and not self.grid[r][c].checked):
+					print("hey")
+					
 	def add_creature(self, species, direction, r, c):
 		assert (r >= 0 and c >= 0)
 		assert (r <= self.rows and c <= self.columns)
 		self.grid[r][c] = Creature(species, direction, r, c)
 		return True
-
-	def iteration(self):
-		for r in range(self.rows):
-			for c in range(self.columns):
-				if (self.grid[r][c] != 0 and not self.grid[r][c].checked):
-					print("hey")
 					
 					
 	def facing_wall(self, r, c):
@@ -43,6 +43,21 @@ class Darwin:
 		nr = next_row()
 		nc = next_column()
 		return not facing_wall and not facing_empty and self.grid[r][c].species != self.grid[nr][nc].species
+		
+	def print_grid(self):
+		print()
+		print(" ", end = "")
+		for i in range(self.columns):
+			print(i % 10, end="")
+		print()
+		for i in range(self.rows):
+			print(i % 10, end="")
+			for j in range(self.columns):
+				if self.grid[i][j] == 0:
+					print(".", end="")
+				else:
+					print(self.grid[i][j].species.name, end = "")
+			print()
 
 class Species:
 	def __init__(self, name, program=[]):
@@ -77,3 +92,23 @@ class Creature:
 			return self.c + 1
 		else:
 			return self.c - 1
+
+	def right(self):
+		if self.direction == 0:
+			self.direction = 1
+		elif self.direction == 1:
+			self.direction = 2
+		elif self.direction == 2:
+			self.direction = 3
+		elif self.direction == 3:
+			self.direction = 0
+			
+	def left(self):
+		if self.direction == 0:
+			self.direction = 3
+		elif self.direction == 1:
+			self.direction = 0
+		elif self.direction == 2:
+			self.direction = 1
+		elif self.direction == 3:
+			self.direction = 2
