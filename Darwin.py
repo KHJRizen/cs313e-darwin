@@ -13,18 +13,24 @@ class Darwin:
 			for c in range(self.columns):
 				self.grid[r].append(0)
 
-	def add_creature(self, species, direction, r, c):
+	def add_creature(self, species, r, c):
 		assert (r >= 0 and c >= 0)
 		assert (r <= self.rows and c <= self.columns)
-		self.grid[r][c] = Creature(species, direction, r, c)
+		self.grid[r][c] = Creature(species, r, c)
 		return True
 
+	def iteration(self):
+		for r in range(self.rows):
+			for c in range(self.columns):
+				if (self.grid[r][c] != 0 and not self.grid[r][c].checked):
+					print("hey")
 
 class Species:
 	def __init__(self, name, program=[]):
 		self.name = name
 		self.program = program
-
+	def add_instruction(self, instruction):
+		self.program.append(instruction)
 
 class Creature:
 	def __init__(self, species, direction, r, c, program_count=0):
