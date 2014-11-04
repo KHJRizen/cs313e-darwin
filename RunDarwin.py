@@ -11,3 +11,5 @@ print(x.grid)
 
 y = x.add_creature(hopper, 0, 1, 0)
 print(x.grid)
+
+x.iteration()

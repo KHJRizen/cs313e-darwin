@@ -13,10 +13,10 @@ class Darwin:
 			for c in range(self.columns):
 				self.grid[r].append(0)
 
-	def add_creature(self, species, r, c):
+	def add_creature(self, species, direction, r, c):
 		assert (r >= 0 and c >= 0)
 		assert (r <= self.rows and c <= self.columns)
-		self.grid[r][c] = Creature(species, r, c)
+		self.grid[r][c] = Creature(species, direction, r, c)
 		return True
 
 	def iteration(self):
