@@ -28,39 +28,45 @@ class Darwin:
 					self.grid[r][c].checked = False
 						
 	def take_action(self, r, c):
+		print("Test: " ,self.grid[r][c].species.program[self.grid[r][c].program_count])
+		print("Test #: " ,self.grid[r][c].program_count)
 		if self.grid[r][c].species.program[self.grid[r][c].program_count]== "hop":
 			self.hop(r, c)
 			#self.hop(r,c)
 			return True
-		if program[program_count] == "left":
+		if self.grid[r][c].species.program[self.grid[r][c].program_count] == "left":
 			self.grid[r][c].left()
 			self.grid[r][c].program_count += 1
 			self.grid[r][c].checked = True
 			return True
-		if program[program_count] == "right":
+		if self.grid[r][c].species.program[self.grid[r][c].program_count] == "right":
 			self.grid[r][c].right()
 			self.grid[r][c].program_count += 1
 			self.grid[r][c].checked = True
 			return True
-		if program[program_count] == "infect":
+		if self.grid[r][c].species.program[self.grid[r][c].program_count] == "infect":
 			self.grid[r][c].infect(r, c)
 			#same as hop
 			return True			
-
-		instruction = self.grid[r][c].species.program[self.grid[r][c].program_count]
-		#split to get last digit; make sure to convert it to integer for use else where
 		
+		jump_num = 0
+		instruction = self.grid[r][c].species.program[self.grid[r][c].program_count]
+		instruction_split = instruction.split()
+		if len(instruction_split)== 2:
+			jump_num = int(instruction_split[-1])
+		#split to get last digit; make sure to convert it to integer for use else where
+
 		
 		# how to get jump_num. it's the last digits of the program at index program count
 		if "if_empty" in instruction:
-			if facing_empty():
+			if self.facing_empty(r, c):
 				self.grid[r][c].program_count = jump_num
 			else:
 				self.grid[r][c].program_count += 1
 			return False
 
 		if "if_wall" in instruction:
-			if facing_wall():
+			if self.facing_wall(r, c):
 				self.grid[r][c].program_count = jump_num
 			else:
 				self.grid[r][c].program_count += 1
