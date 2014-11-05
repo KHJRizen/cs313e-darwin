@@ -17,8 +17,36 @@ class Darwin:
 		for r in range(self.rows):
 			for c in range(self.columns):
 				if (self.grid[r][c] != 0 and not self.grid[r][c].checked):
-					print("hey")
-					
+					temp = self.take_action(r,c)
+					while not temp:
+						temp = self.take_action(r,c)
+						
+		# reset all of creatures for next cycle
+		for r in range(self.rows):
+			for c in range(self.columns):
+				if self.grid[r][c] != 0:
+					self.grid[r][c].checked = False
+						
+	def take_action(self, r, c):
+		if self.grid[r][c].species.program[self.grid[r][c].program_count]== "hop":
+			self.hop(r, c)
+			#self.hop(r,c)
+			return True
+		if program[program_count] == "left":
+			self.grid[r][c].left()
+			self.grid[r][c].program_count += 1
+			self.grid[r][c].checked = True
+			return True
+		if program[program_count] == "right":
+			self.grid[r][c].right()
+			self.grid[r][c].program_count += 1
+			self.grid[r][c].checked = True
+			return True
+		if program[program_count] == "infect":
+			self.grid[r][c].infect(r, c)
+			#same as hop
+			return True			
+			
 	def add_creature(self, species, direction, r, c):
 		assert (r >= 0 and c >= 0)
 		assert (r <= self.rows and c <= self.columns)
@@ -43,7 +71,19 @@ class Darwin:
 		nr = next_row()
 		nc = next_column()
 		return not facing_wall and not facing_empty and self.grid[r][c].species != self.grid[nr][nc].species
-		
+	
+	def hop(self):
+		nr = next_row()
+		nc = next_column()
+		if facing_empty():
+			self.grid[nr][nc] = grid[r][c]
+			self.grid[r][c] = 0
+			self.grid[nr][nc].program_count += 1
+			self.grid[nr][nc].checked = True
+		else:
+			self.grid[r][c].program_count += 1
+			self.grid[r][c].checked = True
+	
 	def print_grid(self):
 		print()
 		print(" ", end = "")
@@ -63,6 +103,7 @@ class Species:
 	def __init__(self, name, program=[]):
 		self.name = name
 		self.program = program
+		
 	def add_instruction(self, instruction):
 		self.program.append(instruction)
 

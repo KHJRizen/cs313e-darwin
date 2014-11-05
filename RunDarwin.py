@@ -13,6 +13,7 @@ y = x.add_creature(hopper, 0, 1, 0)
 y = x.add_creature(hopper, 0, 2, 0)
 print(x.grid)
 
+
 x.cycle()
 
 x.print_grid()
