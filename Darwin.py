@@ -46,6 +46,44 @@ class Darwin:
 			self.grid[r][c].infect(r, c)
 			#same as hop
 			return True			
+
+		instruction = self.grid[r][c].species.program[self.grid[r][c].program_count]
+		#split to get last digit; make sure to convert it to integer for use else where
+		
+		
+		# how to get jump_num. it's the last digits of the program at index program count
+		if "if_empty" in instruction:
+			if facing_empty():
+				self.grid[r][c].program_count = jump_num
+			else:
+				self.grid[r][c].program_count += 1
+			return False
+
+		if "if_wall" in instruction:
+			if facing_wall():
+				self.grid[r][c].program_count = jump_num
+			else:
+				self.grid[r][c].program_count += 1
+			return False
+
+		if "if_random" in instruction:
+			if random.randint % 2:
+				self.grid[r][c].program_count = jump_num
+			else:
+				self.grid[r][c].program_count += 1
+			return False
+
+		if "if_enemy" in instruction:
+			if facing_enemy():
+				self.grid[r][c].program_count = jump_num
+			else:
+				self.grid[r][c].program_count += 1
+			return False
+
+		if "go" in instruction:
+			self.grid[r][c].program_count = jump_num
+			return False
+		return True
 			
 	def add_creature(self, species, direction, r, c):
 		assert (r >= 0 and c >= 0)
@@ -66,17 +104,17 @@ class Darwin:
 		return not self.facing_wall(r, c) and self.grid[nr][nc] == 0
 
 		
-	def facing_enemy(self):
+	def facing_enemy(self, r, c):
 		self.direction = self.grid[r][c]
 		nr = next_row()
 		nc = next_column()
 		return not facing_wall and not facing_empty and self.grid[r][c].species != self.grid[nr][nc].species
 	
-	def hop(self):
-		nr = next_row()
-		nc = next_column()
-		if facing_empty():
-			self.grid[nr][nc] = grid[r][c]
+	def hop(self, r, c):
+		nr = self.grid[r][c].next_row()
+		nc = self.grid[r][c].next_column()
+		if self.facing_empty(r, c):
+			self.grid[nr][nc] = self.grid[r][c]
 			self.grid[r][c] = 0
 			self.grid[nr][nc].program_count += 1
 			self.grid[nr][nc].checked = True
