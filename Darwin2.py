@@ -228,3 +228,18 @@ class Darwin:
             self.grid[nr][nc].program_count = 0
         self.grid[r][c].program_count += 1
         self.grid[r][c].checked = True
+        
+    def print_grid(self):
+        print()
+        print(" ", end = "")
+        for i in self.columns:
+            print(i % 10, end="")
+        print()
+        for i in self.rows:
+            print(i % 10, end="")
+            for j in self.columns:
+                if self.grid[i][j] == 0:
+                    print(".", end="")
+                else:
+                    print(self.grid[i][j].species.name, end = "")
+            print()
