@@ -17,13 +17,14 @@ class Species:
         return self.program != creature.program
         
 class Creature:
-    def __init__(self, species, direction, r, c, program_count=0):
+    def __init__(self, species, name, direction, r, c, program_count=0):
         self.species = species
         self.direction = direction
         self.program_count = program_count
         self.checked = False
         self.r = r
         self.c = c
+        self.name = str(name)
 
     # gets row of one space in front of where creature is facing, given direction
     def next_row(self):
@@ -232,14 +233,14 @@ class Darwin:
     def print_grid(self):
         print()
         print(" ", end = "")
-        for i in self.columns:
+        for i in range( self.columns):
             print(i % 10, end="")
         print()
-        for i in self.rows:
+        for i in range(self.rows):
             print(i % 10, end="")
-            for j in self.columns:
+            for j in range(self.columns):
                 if self.grid[i][j] == 0:
                     print(".", end="")
                 else:
-                    print(self.grid[i][j].species.name, end = "")
+                    print(str(self.grid[i][j].name), end = "")
             print()
