@@ -1,9 +1,10 @@
 from random import randint, sample, seed
 
+import random
+
 class Species:
     def __init__(self, program=[]):
-        #self.name = name
-        self.program = program
+        self.program = []
 
     # to add to the program
     def add_instruction(self, instruction):
@@ -65,7 +66,7 @@ class Creature:
             self.direction = 0
             
 class Darwin:
-    def __init__(self, width, height):
+    def __init__(self, height,width):
         self.rows = height
         self.columns = width
         #N E S W
@@ -83,14 +84,45 @@ class Darwin:
 
     def add_creature(self, creature):
     
-        #assert (r <= self.rows and c <= self.columns)
-        #assert (r >= 0 and c >= 0)
+        assert (creature.r <= self.rows and creature.c <= self.columns)
+        assert (creature.r >= 0 and creature.c >= 0)
         
         #add creature at desired position
         #creature instantiated in RUnDarwin
+        #print(creature.r)
+        #print(creature.c)
         self.grid[creature.r][creature.c] = creature
         return True
 
+    def hop(self, r , c):
+        
+        nr = self.grid[r][c].next_row()
+        nc = self.grid[r][c].next_column()
+ 
+        if self.facing_empty(r, c) is True:
+            self.grid[r][c].r = nr
+            self.grid[r][c].c = nc
+        
+            self.grid[nr][nc] = self.grid[r][c]
+            self.grid[r][c] = 0
+                    
+            self.grid[nr][nc].program_count += 1
+            self.grid[nr][nc].checked = True
+        else:
+            self.grid[r][c].program_count += 1
+            self.grid[r][c].checked = True
+            
+    # tries to infect space in front of creature. if failure, wastes turn
+    def infect(self, r,c):
+        #self.direction = self.grid[r][c]
+        nr = self.grid[r][c].next_row()
+        nc = self.grid[r][c].next_column()
+        if self.facing_enemy(r, c) is True:
+            self.grid[nr][nc].species = self.grid[r][c].species
+            self.grid[nr][nc].program_count = 0
+        self.grid[r][c].program_count += 1
+        self.grid[r][c].checked = True
+        
     def cycle(self):
         #traverse through every spot on the grid
         for r in range(self.rows):
@@ -103,14 +135,7 @@ class Darwin:
                     #while action is not taken, keep running through instructions
                     while temp is False:
                         temp = self.take_action(r,c)
-                        
-                    
-                    #print(self.facing_wall(r, c))
-                    #print(self.facing_empty(r, c))
-                    
-                    #temp = self.grid[r][c].next()
-                    #while (temp != 0 and not take_action()):
-                    #    temp = grid[r][c].next()
+                     
         # resets checked variable for all creatures
         for r in range(self.rows):
             for c in range(self.columns):
@@ -119,7 +144,7 @@ class Darwin:
       
     def take_action(self, r, c):
         if self.grid[r][c].species.program[self.grid[r][c].program_count]== "hop":
-            self.grid[r][c].hop(r, c)
+            self.hop(r, c)
             return True
         if self.grid[r][c].species.program[self.grid[r][c].program_count] == "left":
             self.grid[r][c].left()
@@ -132,7 +157,7 @@ class Darwin:
             self.grid[r][c].checked = True
             return True
         if self.grid[r][c].species.program[self.grid[r][c].program_count] == "infect":
-            self.grid[r][c].infect(r, c)
+            self.infect(r, c)
             #same as hop
             return True
 
@@ -146,7 +171,7 @@ class Darwin:
             jump_num = int(instruction_split[-1])
         
         if "if_empty" in instruction:
-            if facing_empty(r, c):
+            if self.facing_empty(r, c):
                 self.grid[r][c].program_count = jump_num
             else:
                 self.grid[r][c].program_count += 1
@@ -160,21 +185,21 @@ class Darwin:
             return False
 
         if "if_random" in instruction:
-            if random.randint % 2:
+            if random.randrange(0,2) % 2:
                 self.grid[r][c].program_count = jump_num
             else:
                 self.grid[r][c].program_count += 1
             return False
 
         if "if_enemy" in instruction:
-            if facing_enemy(r, c):
+            if self.facing_enemy(r, c):
                 self.grid[r][c].program_count = jump_num
             else:
                 self.grid[r][c].program_count += 1
             return False
 
         if "go" in instruction:
-            grid[r][c].program_count = jump_num
+            self.grid[r][c].program_count = jump_num
             return False
             
         #return True if nothing happened
@@ -184,7 +209,7 @@ class Darwin:
     def facing_empty(self, r, c):
         nr = self.grid[r][c].next_row()
         nc = self.grid[r][c].next_column()
-        
+                
         # if false from facing_wall, and no species in space, then facing_empty
         return not self.facing_wall(r, c) and self.grid[nr][nc] == 0
         
@@ -202,33 +227,9 @@ class Darwin:
         nc = self.grid[r][c].next_column()
         
         # TRUE > not facing wall, not empty, not facing enemy, and make sure species in front is not same species 
-        return not facing_wall and not facing_empty and self.grid[r][c].species != self.grid[nr][nc].species
+        return not self.facing_wall(r,c) and not self.facing_empty(r,c) and self.grid[r][c].species != self.grid[nr][nc].species
     
-    def hop(self, r , c):
-        nr = self.grid[r][c].next_row()
-        print(nr)
-        nc = self.grid[r][c].next_column()
-        print(nc)
-                
-        if facing_empty(r, c) is True:
-            grid[nr][nc] = grid[r][c]
-            grid[r][c] = 0
-            grid[nr][nc].program_count += 1
-            grid[nr][nc].checked = True
-        else:
-            grid[r][c].program_count += 1
-            grid[r][c].checked = True
-            
-    # tries to infect space in front of creature. if failure, wastes turn
-    def infect(self, r,c):
-        #self.direction = self.grid[r][c]
-        nr = self.grid[r][c].next_row()
-        nc = self.grid[r][c].next_column()
-        if facing_enemy(r, c) is True:
-            self.grid[nr][nc].species = self.grid[r][c].species
-            self.grid[nr][nc].program_count = 0
-        self.grid[r][c].program_count += 1
-        self.grid[r][c].checked = True
+    
         
     def print_grid(self):
         print()
