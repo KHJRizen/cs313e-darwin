@@ -54,14 +54,22 @@ def main():
     # ----
 
     best = Species()
+    #best.add_instruction("if_enemy 6")
+    #best.add_instruction("if_empty 4")
+    #best.add_instruction("left")
+    #best.add_instruction("go 0")
+    #best.add_instruction("hop")
+    #best.add_instruction("go 0")
+    #best.add_instruction("infect")
+    #best.add_instruction("go 0")
+    best.add_instruction("if_wall 4")
     best.add_instruction("if_enemy 6")
-    best.add_instruction("if_empty 4")
-    best.add_instruction("left")
-    best.add_instruction("go 0")
     best.add_instruction("hop")
-    best.add_instruction("go 0")
+    best.add_instruction("goto 0")
+    best.add_instruction("left")
+    best.add_instruction("goto 0")
     best.add_instruction("infect")
-    best.add_instruction("go 0")
+    best.add_instruction("goto 0")
     
     
     # ----
@@ -213,11 +221,18 @@ def main():
     grid.add_creature(t10)
         
     for i in range(1001):
-        print("Turn = " + str(i))
-        print(t1.direction)
-        grid.cycle()
-        print()
-    grid.print_grid()
+        if i < 11:
+            print("Cycle = " + str(i))
+            grid.print_grid()
+            print()
+            continue    
+            
+        if i%100 == 0:
+            print("Cycle = " + str(i))
+            grid.print_grid()   
+            print()
+        
+        
     
     
     # ----
@@ -274,6 +289,18 @@ def main():
     t9 = Creature(trap, "t", random.randrange(0, 4), random.randrange(0, 72), random.randrange(0, 72))
     t10 = Creature(trap, "t", random.randrange(0, 4), random.randrange(0, 72), random.randrange(0, 72))
     
+    b1 = Creature(best, "b", random.randrange(0, 4), random.randrange(0, 72), random.randrange(0, 72))
+    b2 = Creature(best, "b", random.randrange(0, 4), random.randrange(0, 72), random.randrange(0, 72))
+    b3 = Creature(best, "b", random.randrange(0, 4), random.randrange(0, 72), random.randrange(0, 72))
+    b4 = Creature(best, "b", random.randrange(0, 4), random.randrange(0, 72), random.randrange(0, 72))
+    b5 = Creature(best, "b", random.randrange(0, 4), random.randrange(0, 72), random.randrange(0, 72))
+    b6 = Creature(best, "b", random.randrange(0, 4), random.randrange(0, 72), random.randrange(0, 72))
+    b7 = Creature(best, "b", random.randrange(0, 4), random.randrange(0, 72), random.randrange(0, 72))
+    b8 = Creature(best, "b", random.randrange(0, 4), random.randrange(0, 72), random.randrange(0, 72))
+    b9 = Creature(best, "b", random.randrange(0, 4), random.randrange(0, 72), random.randrange(0, 72))
+    b10 = Creature(best, "b", random.randrange(0, 4), random.randrange(0, 72), random.randrange(0, 72))
+    
+    
     grid.add_creature(f1)
     grid.add_creature(f2)
     grid.add_creature(f3)
@@ -314,13 +341,29 @@ def main():
     grid.add_creature(t8)
     grid.add_creature(t9)
     grid.add_creature(t10)
-        
+    grid.add_creature(b1)
+    grid.add_creature(b2)
+    grid.add_creature(b3)
+    grid.add_creature(b4)
+    grid.add_creature(b5)
+    grid.add_creature(b6)
+    grid.add_creature(b7)
+    grid.add_creature(b8)
+    grid.add_creature(b9)
+    grid.add_creature(b10)
+    
     for i in range(1001):
-        print("Turn = " + str(i))
-        print(t1.direction)
+        if i < 11:
+            print("Cycle = " + str(i))
+            grid.print_grid()
+            print()
+            continue    
+            
+        if i%100 == 0:
+            print("Cycle = " + str(i))
+            grid.print_grid()   
+            print()
         grid.cycle()
-        print()
-    grid.print_grid()
     
    
         

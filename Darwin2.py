@@ -179,7 +179,7 @@ class Darwin:
             return False
 
         if "if_wall" in instruction:
-            if facing_wall(r, c):
+            if self.facing_wall(r, c):
                 self.grid[r][c].program_count = jump_num
             else:
                 self.grid[r][c].program_count += 1
