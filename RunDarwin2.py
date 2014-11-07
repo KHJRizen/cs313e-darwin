@@ -4,14 +4,26 @@ import random
 
 def main():
 
+    # ------
+    # hopper
+    # ------
+
     hopper = Species()
     hopper.add_instruction("hop")
     hopper.add_instruction("go 0")
-        
+
+    # ----
+    # food
+    # ---- 
+   
     food = Species()
     food.add_instruction("left")
     food.add_instruction("go 0")
         
+    # -----
+    # rover
+    # -----
+    
     rover = Species()
     rover.add_instruction("if_enemy 9")
     rover.add_instruction("if_empty 7")
@@ -24,14 +36,23 @@ def main():
     rover.add_instruction("go 0")
     rover.add_instruction("infect")
     rover.add_instruction("go 0")
-        
+
+    # ----
+    # trap
+    # ----
+    
     trap = Species()
     trap.add_instruction("if enemy 3")
     trap.add_instruction("left")
     trap.add_instruction("go 0")
     trap.add_instruction("infect")
     trap.add_instruction("go 0")
-        
+      
+
+    # ----
+    # best
+    # ----
+
     best = Species()
     best.add_instruction("if_enemy 6")
     best.add_instruction("if_empty 4")
@@ -41,11 +62,12 @@ def main():
     best.add_instruction("go 0")
     best.add_instruction("infect")
     best.add_instruction("go 0")
-        
-    #0123
-    #3012
     
-    #darwin8x8()
+    
+    # ----
+    # darwin8x8()
+    # ----
+    
     print("*** Darwin 8x8 ***")
     grid = Darwin(8, 8)
       
