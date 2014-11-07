@@ -119,6 +119,7 @@ class Darwin:
         nc = self.grid[r][c].next_column()
         if self.facing_enemy(r, c) is True:
             self.grid[nr][nc].species = self.grid[r][c].species
+            self.grid[nr][nc].name = self.grid[r][c].name
             self.grid[nr][nc].program_count = 0
         self.grid[r][c].program_count += 1
         self.grid[r][c].checked = True

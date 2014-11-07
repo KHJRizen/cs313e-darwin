@@ -63,16 +63,11 @@ def main():
     grid.add_creature(h3)
     grid.add_creature(h4)
     
-    print(h1.species.program)
-    print(h2.species.program)
-    print(h3.species.program)
-    print(h4.species.program)
-    print(f1.species.program)
-    print(f2.species.program)
-    
     for i in range(6):
+        print("Turn = " + str(i))
         grid.print_grid()
         grid.cycle()
+        print()
     
     
     
@@ -84,16 +79,19 @@ def main():
     h1 = Creature(hopper, "h",2, 3, 2)
     r1 = Creature(rover, "r", 1,5, 4)
     t2 = Creature(trap, "t", 0,6, 8)
+    b1 = Creature(best, "b", 0, 1, 2)
     
     grid.add_creature(t1)
     grid.add_creature(t2)
     grid.add_creature(h1)
     grid.add_creature(r1)
+    grid.add_creature(b1)
     
     for i in range(10):
         print("Turn = " + str(i))
         grid.print_grid()
         grid.cycle()
+        print()
     
     
     
