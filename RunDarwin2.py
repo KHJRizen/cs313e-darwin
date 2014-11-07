@@ -54,14 +54,6 @@ def main():
     # ----
 
     best = Species()
-    #best.add_instruction("if_enemy 6")
-    #best.add_instruction("if_empty 4")
-    #best.add_instruction("left")
-    #best.add_instruction("go 0")
-    #best.add_instruction("hop")
-    #best.add_instruction("go 0")
-    #best.add_instruction("infect")
-    #best.add_instruction("go 0")
     best.add_instruction("if_wall 4")
     best.add_instruction("if_enemy 6")
     best.add_instruction("hop")
