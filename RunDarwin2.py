@@ -86,6 +86,7 @@ def main():
     grid.add_creature(h4)
     
     for i in range(6):
+        #printed which turn it is
         print("Turn = " + str(i))
         grid.print_grid()
         grid.cycle()
