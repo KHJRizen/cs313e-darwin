@@ -1,0 +1,161 @@
+commit 6f3121e940f1ed9c1c0b6b59ceb4f8fef7bee428
+Author: ericnam <ericnam86@utexas.edu>
+Date:   Thu Nov 6 21:54:13 2014 -0600
+
+    Added test files
+
+commit a8244a5c140eb7935e9e8245fb5806696263ef90
+Author: ericnam <ericnam86@utexas.edu>
+Date:   Thu Nov 6 21:44:21 2014 -0600
+
+    Added Darwin.html
+
+commit 7d571b1d1a978d0e60fa56f335c10fcb62c8abfa
+Author: ericnam <ericnam86@utexas.edu>
+Date:   Thu Nov 6 21:43:30 2014 -0600
+
+    Renamed Darwin2 to darwin
+
+commit 39e945bb986c85ed2e0d29c7ac0394dca04d667a
+Author: ericnam <ericnam86@utexas.edu>
+Date:   Thu Nov 6 21:39:39 2014 -0600
+
+    added inline comments
+
+commit e218431e03723d59e5035ad08b037d7b5ad4e1cb
+Author: ericnam <ericnam86@utexas.edu>
+Date:   Thu Nov 6 21:35:08 2014 -0600
+
+    Finalizing code
+
+commit 39d1c65abcd691915662cd37584671268ff126d6
+Author: ericnam <ericnam86@utexas.edu>
+Date:   Thu Nov 6 21:16:21 2014 -0600
+
+    Minor fix
+
+commit b88d47e069ef44eaaf05c7a9b54d83423e4d1e69
+Author: ericnam <ericnam86@utexas.edu>
+Date:   Thu Nov 6 20:53:08 2014 -0600
+
+    Removed function different_species, useless
+
+commit 617f3c1523f3637c32f8a819a401ddaa78724697
+Author: ericnam <ericnam86@utexas.edu>
+Date:   Thu Nov 6 20:50:25 2014 -0600
+
+    All code seems to work
+
+commit 5d0fe73946ca06b9bbd81eb0306a11b49c06870d
+Author: ericnam <ericnam86@utexas.edu>
+Date:   Thu Nov 6 20:22:59 2014 -0600
+
+    Fixed trap
+
+commit 4d90f1b9a692d7b369179a73be494434a02e78a9
+Author: ericnam <ericnam86@utexas.edu>
+Date:   Thu Nov 6 19:48:32 2014 -0600
+
+    Trying to fix trap
+
+commit e1be61de9ba56043efe54e4efbb279938e2c570c
+Author: ericnam <ericnam86@utexas.edu>
+Date:   Thu Nov 6 18:55:35 2014 -0600
+
+    updated RunDarwin2
+
+commit 9d071acda3c8bd78172354d4adc78d7225276e03
+Author: ericnam <ericnam86@utexas.edu>
+Date:   Thu Nov 6 18:54:40 2014 -0600
+
+    Added RunDarwin.out
+
+commit ed643494a075644a3caba8bdfcafe7abd8a24594
+Author: ericnam <ericnam86@utexas.edu>
+Date:   Thu Nov 6 18:47:18 2014 -0600
+
+    Added RunDarwin.out
+
+commit a54e00883e3c922c237498f39718ec73970b3251
+Author: ericnam <ericnam86@utexas.edu>
+Date:   Thu Nov 6 18:45:27 2014 -0600
+
+    Fixed issue with name replacement when infecting, near completion
+
+commit 29356beb7489601bec9f903ae7c680129e9f8a27
+Author: ericnam <ericnam86@utexas.edu>
+Date:   Thu Nov 6 00:14:48 2014 -0600
+
+    Darwin2 rough completion, needs testing
+
+commit c8ff1519aff456a8930596b0245fb86c3d21e7da
+Author: ericnam <ericnam86@utexas.edu>
+Date:   Wed Nov 5 21:08:28 2014 -0600
+
+    More fixed to print_grid
+
+commit 69ca22d105ed56f3941346c2bcb69be50b41cac5
+Author: ericnam <ericnam86@utexas.edu>
+Date:   Wed Nov 5 21:00:50 2014 -0600
+
+    added print grid
+
+commit 6c68f6c6c19834d0ffaf4ededa3669f95e17059f
+Author: ericnam <ericnam86@utexas.edu>
+Date:   Wed Nov 5 20:55:01 2014 -0600
+
+    Seperate version of darwin
+
+commit 90b29816bd6182a02235a02686d43df6f9c008e2
+Author: Kevin Jiang <kevin.jiang@utexas.edu>
+Date:   Tue Nov 4 22:24:44 2014 -0600
+
+    fixed some more issues regarding the looping of cycles, but hopper only seems to move once before not doing anything else
+
+commit d2e721a24501e192b57a8e7eb1af454dfe1451db
+Author: Kevin Jiang <kevin.jiang@utexas.edu>
+Date:   Tue Nov 4 22:01:25 2014 -0600
+
+    close #16, fixed number of arguments for multiple functions and got hoppers to move one spot over, however index error occurs when 2 or more cycles occur
+
+commit 737e1965648c45d9ea10e80555db9af7a572ef6e
+Author: Kevin Jiang <kevin.jiang@utexas.edu>
+Date:   Tue Nov 4 21:55:22 2014 -0600
+
+    close #15, created a loop in a loop to reset all creatures for next round
+
+commit cd6f6cc1dc44e9f417e5b609593911839c2eb05b
+Author: Kevin Jiang <kevin.jiang@utexas.edu>
+Date:   Tue Nov 4 14:34:49 2014 -0600
+
+    close #14, looping error solved with range function missing from before
+
+commit ecc4a4691938dee8b6789838d62a45f4d3d21039
+Author: Kevin Jiang <kevin.jiang@utexas.edu>
+Date:   Tue Nov 4 14:28:54 2014 -0600
+
+    close #13, fixed next_row and next_column check to properly increment
+
+commit d70ce271f2fd30cf693fccd68612b4abd05e3cc8
+Author: Kevin Jiang <kevin.jiang@utexas.edu>
+Date:   Tue Nov 4 02:19:40 2014 -0600
+
+    close #12, argument error solved and able to find existence of creature added signaled by hey
+
+commit 7070f08a2f8156be13820d647f836c0f806a0168
+Author: Kevin Jiang <kevin.jiang@utexas.edu>
+Date:   Tue Nov 4 02:14:56 2014 -0600
+
+    close #11, able to create an insert creature into grid now.
+
+commit 20a3b47c4760656253dd5a62b589a356fda51677
+Author: Kevin Jiang <kevin.jiang@utexas.edu>
+Date:   Tue Nov 4 01:56:58 2014 -0600
+
+    Basic Darwin.py and RunDarwin.py created, all it can really do so far is create the grid in a 2D list
+
+commit 30108e7a8866234d5b0f6523ffa13f9629886786
+Author: KHJRizen <kevin.jiang@utexas.edu>
+Date:   Mon Nov 3 23:32:37 2014 -0600
+
+    Initial commit
