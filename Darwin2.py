@@ -9,13 +9,6 @@ class Species:
     # to add to the program
     def add_instruction(self, instruction):
         self.program.append(instruction)
-
-    # used when infecting to make sure classes are different
-    def different_species(self, creature):
-        #return self.name != creature.species()#species.name?
-        
-        #creature should be species class
-        return self.program != creature.program
         
 class Creature:
     def __init__(self, species, name, direction, r, c, program_count=0):
