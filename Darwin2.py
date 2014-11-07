@@ -3,6 +3,7 @@ from random import randint, sample, seed
 import random
 
 class Species:
+    #holds the species programs
     def __init__(self, program=[]):
         self.program = []
 
@@ -11,6 +12,7 @@ class Species:
         self.program.append(instruction)
         
 class Creature:
+    #holds individual creatures
     def __init__(self, species, name, direction, r, c, program_count=0):
         self.species = species
         self.direction = direction
@@ -38,6 +40,7 @@ class Creature:
         else:
             return self.c - 1
 
+    #turn left
     def left(self):
         if self.direction == 0:
             self.direction = 3
@@ -47,7 +50,7 @@ class Creature:
             self.direction = 1
         elif self.direction == 3:
             self.direction = 2
-
+    #turn right
     def right(self):
         if self.direction == 0:
             self.direction = 1
@@ -59,6 +62,7 @@ class Creature:
             self.direction = 0
             
 class Darwin:
+#instantiates grid and oversees operations
     def __init__(self, height,width):
         self.rows = height
         self.columns = width
@@ -75,23 +79,21 @@ class Darwin:
             for c in range(self.columns):
                 self.grid[r].append(0)
 
+    #adds creature to the grid
     def add_creature(self, creature):
     
         assert (creature.r <= self.rows and creature.c <= self.columns)
         assert (creature.r >= 0 and creature.c >= 0)
-        
-        #add creature at desired position
-        #creature instantiated in RUnDarwin
-        #print(creature.r)
-        #print(creature.c)
         self.grid[creature.r][creature.c] = creature
         return True
 
+    #makes the creature hop to the next position
     def hop(self, r , c):
         
         nr = self.grid[r][c].next_row()
         nc = self.grid[r][c].next_column()
  
+        #if the spot you are facing is empty, move to that spot
         if self.facing_empty(r, c) is True:
             self.grid[r][c].r = nr
             self.grid[r][c].c = nc
@@ -101,6 +103,7 @@ class Darwin:
                     
             self.grid[nr][nc].program_count += 1
             self.grid[nr][nc].checked = True
+        #wasted turn
         else:
             self.grid[r][c].program_count += 1
             self.grid[r][c].checked = True
@@ -110,10 +113,12 @@ class Darwin:
         #self.direction = self.grid[r][c]
         nr = self.grid[r][c].next_row()
         nc = self.grid[r][c].next_column()
+        #if you're facing a different species
         if self.facing_enemy(r, c) is True:
             self.grid[nr][nc].species = self.grid[r][c].species
             self.grid[nr][nc].name = self.grid[r][c].name
             self.grid[nr][nc].program_count = 0
+        #else wasted turn
         self.grid[r][c].program_count += 1
         self.grid[r][c].checked = True
         
@@ -137,6 +142,7 @@ class Darwin:
                     self.grid[r][c].checked = False
       
     def take_action(self, r, c):
+    #lets the creature run through his program list, remaining false if no actions were taken 
         if self.grid[r][c].species.program[self.grid[r][c].program_count]== "hop":
             self.hop(r, c)
             return True
@@ -224,7 +230,7 @@ class Darwin:
         return not self.facing_wall(r,c) and not self.facing_empty(r,c) and self.grid[r][c].species != self.grid[nr][nc].species
     
     
-        
+    #print the grid
     def print_grid(self):
         print()
         print(" ", end = "")
